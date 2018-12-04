@@ -16,7 +16,7 @@ describe Oystercard do
     end
 
     it "throws an error if the limit is exceeded" do
-      money = Oystercard::LIMIT
+      money = Oystercard::MAX_LIMIT
       subject.topup(money)
       expect{ subject.topup(10) }.to raise_error "Sorry, limit exceeded!"
     end
@@ -25,8 +25,16 @@ describe Oystercard do
      expect{ subject.deduct(2) }.to change{ subject.balance }.by(-2)
    end
 
-   it "should give you a state 'in use' for your oystercard" do
-     expect(subject.touch_in). to eq "in use"
+   context "#touch_in" do
+
+     it "should give you a state 'in use' for your oystercard" do
+       subject.topup(2)
+       expect(subject.touch_in). to eq "in use"
+     end
+
+     it "should raise an error if balance is less than £1 on touch in" do
+       expect{ subject.touch_in }.to raise_error "YOU SHALL NOT PASSSSSSS"
+     end
    end
 
    it "should give you a state 'fare completed' for your oystercard" do
@@ -34,6 +42,7 @@ describe Oystercard do
    end
 
    it "should return true if we are touched in" do
+     subject.topup(2)
      subject.touch_in
      expect(subject.in_journey?).to eq true
    end
