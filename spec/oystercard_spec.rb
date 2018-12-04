@@ -25,5 +25,17 @@ describe Oystercard do
      expect{ subject.deduct(2) }.to change{ subject.balance }.by(-2)
    end
 
+   it "should give you a state 'in use' for your oystercard" do
+     expect(subject.touch_in). to eq "in use"
+   end
+
+   it "should give you a state 'fare completed' for your oystercard" do
+     expect(subject.touch_out). to eq "fare completed"
+   end
+
+   it "should return true if we are touched in" do
+     subject.touch_in
+     expect(subject.in_journey?).to eq true
+   end
 
 end
