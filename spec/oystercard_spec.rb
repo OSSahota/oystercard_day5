@@ -22,11 +22,10 @@ describe Oystercard do
     end
 
    it "deducts the fare from my card balance" do
-     expect{ subject.deduct(2) }.to change{ subject.balance }.by(-2)
+     expect{ subject.deduct }.to change{ subject.balance }.by -Oystercard::MIN_LIMIT
    end
 
    context "#touch_in" do
-
      it "should give you a state 'in use' for your oystercard" do
        subject.topup(2)
        expect(subject.touch_in). to eq "in use"
@@ -37,8 +36,14 @@ describe Oystercard do
      end
    end
 
-   it "should give you a state 'fare completed' for your oystercard" do
-     expect(subject.touch_out). to eq "fare completed"
+   context "#touch_out" do
+     it "should give you a state 'fare completed' for your oystercard" do
+       expect(subject.touch_out). to eq "fare completed"
+     end
+
+     it "should deduct the correct fare on touch out" do
+       expect {subject.touch_out}.to change{subject.balance}.by -Oystercard::MIN_LIMIT
+     end
    end
 
    it "should return true if we are touched in" do

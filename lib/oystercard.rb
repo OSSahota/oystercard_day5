@@ -5,6 +5,7 @@ class Oystercard
   MAX_LIMIT = 90
   MIN_LIMIT = 1
 
+
   def initialize(balance = 0, status = false)
     @balance = balance
     @status = status
@@ -13,10 +14,6 @@ class Oystercard
   def topup(money)
     raise "Sorry, limit exceeded!" if @balance + money > MAX_LIMIT
     @balance += money
-  end
-
-  def deduct(fare)
-    @balance -= fare
   end
 
   def touch_in
@@ -28,6 +25,7 @@ class Oystercard
   end
 
   def touch_out
+    self.deduct
     if @status == true
       @status = false
     end
@@ -37,5 +35,9 @@ class Oystercard
   def in_journey?
     @status == true
   end
+
+    def deduct
+      @balance -= MIN_LIMIT
+    end
 
 end
