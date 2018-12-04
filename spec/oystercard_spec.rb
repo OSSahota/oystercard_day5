@@ -2,7 +2,7 @@ require "oystercard"
 
 describe Oystercard do
 
-  let(:card) { Oystercard.new }
+  # let(:card) { Oystercard.new }
 
   it { is_expected.to respond_to(:balance) }
 
@@ -19,18 +19,9 @@ describe Oystercard do
     end
 
     it "throws an error if the limit is exceeded" do
-      allow(card).to receive(:exceed_limit).and_return(true)
-      expect{ card.topup(10) }.to raise_error "Sorry, limit exceeded!"
-    end
-
-  end
-
-  it { is_expected.to respond_to(:exceed_limit) }
-
-  context "#exceed_limit" do
-
-    it "returns true or false" do
-      expect(card.exceed_limit).to be(true).or be(false)
+      money = Oystercard::LIMIT
+      subject.topup(money)
+      expect{ subject.topup(10) }.to raise_error "Sorry, limit exceeded!"
     end
 
   end
