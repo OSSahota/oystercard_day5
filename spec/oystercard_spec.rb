@@ -2,15 +2,12 @@ require "oystercard"
 
 describe Oystercard do
 
-  # let(:card) { Oystercard.new }
-
   it { is_expected.to respond_to(:balance) }
 
   it "checks that initialized balance is 0" do
     expect(subject.balance).to eq(0)
   end
 
-  context "#topup" do
 
   it  { is_expected.to respond_to(:topup).with(1).argument }
 
@@ -24,7 +21,9 @@ describe Oystercard do
       expect{ subject.topup(10) }.to raise_error "Sorry, limit exceeded!"
     end
 
-  end
+   it "deducts the fare from my card balance" do
+     expect{ subject.deduct(2) }.to change{ subject.balance }.by(-2)
+   end
 
 
 end
