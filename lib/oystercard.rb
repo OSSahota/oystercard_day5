@@ -9,6 +9,7 @@ class Oystercard
   def initialize(balance = 0, status = false)
     @balance = balance
     @status = status
+    @entry_station = nil
   end
 
   def topup(money)
@@ -16,12 +17,12 @@ class Oystercard
     @balance += money
   end
 
-  def touch_in
+  def touch_in(entry_station)
     raise "YOU SHALL NOT PASSSSSSS" if @balance < MIN_LIMIT
     if @status == false
       @status = true
     end
-    return "Entry station"
+    @entry_station = entry_station
   end
 
   def touch_out
