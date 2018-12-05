@@ -1,6 +1,6 @@
 class Oystercard
 
-  attr_reader :balance
+  attr_reader :balance, :entry_station
 
   MAX_LIMIT = 90
   MIN_LIMIT = 1
@@ -19,27 +19,23 @@ class Oystercard
 
   def touch_in(entry_station)
     raise "YOU SHALL NOT PASSSSSSS" if @balance < MIN_LIMIT
-    if @status == false
+    # if @status == false
       @status = true
-    end
+    
     @entry_station = entry_station
   end
 
   def touch_out
     deduct
-    if @status == true
-      @status = false
-    end
+    # if @status == true
+      status = false
     return "fare completed"
+    @entry_station = nil
   end
 
   def in_journey?
-    @status == true
+    @status == true if @entry_station != nil
   end
-
-  # def entry_station
-  #   "Entry station"
-  # end
 
 private
     def deduct
