@@ -6,9 +6,9 @@ class Oystercard
   MIN_LIMIT = 1
 
 
-  def initialize(balance = 0, status = false)
-    @balance = balance
-    @status = status
+  def initialize
+    @balance = 0
+    @status = false
     @entry_station = nil
   end
 
@@ -28,7 +28,7 @@ class Oystercard
   def touch_out
     deduct
     # if @status == true
-      status = false
+      @status = false
     return "fare completed"
     @entry_station = nil
   end

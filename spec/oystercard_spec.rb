@@ -24,11 +24,7 @@ describe Oystercard do
     end
 
    context "#touch_in" do
-     it "should give you a state 'in use' for your oystercard" do
-       subject.topup(2)
-       pending(subject.touch_in(:entry_station)).to eq "in use"
-     end
-
+     
      it "should raise an error if balance is less than £1 on touch in" do
        expect{ subject.touch_in(:entry_station) }.to raise_error "YOU SHALL NOT PASSSSSSS"
      end
