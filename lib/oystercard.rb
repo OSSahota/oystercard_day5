@@ -21,7 +21,7 @@ class Oystercard
     if @status == false
       @status = true
     end
-    return "in use"
+    return "Entry station"
   end
 
   def touch_out
@@ -35,6 +35,10 @@ class Oystercard
   def in_journey?
     @status == true
   end
+
+  # def entry_station
+  #   "Entry station"
+  # end
 
 private
     def deduct
