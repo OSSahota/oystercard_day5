@@ -25,7 +25,7 @@ class Oystercard
   end
 
   def touch_out
-    self.deduct
+    deduct
     if @status == true
       @status = false
     end
@@ -36,6 +36,7 @@ class Oystercard
     @status == true
   end
 
+private
     def deduct
       @balance -= MIN_LIMIT
     end

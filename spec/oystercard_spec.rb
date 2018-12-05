@@ -22,7 +22,7 @@ describe Oystercard do
     end
 
    it "deducts the fare from my card balance" do
-     expect{ subject.deduct }.to change{ subject.balance }.by -Oystercard::MIN_LIMIT
+     expect{ subject.touch_out }.to change{ subject.balance }.by -Oystercard::MIN_LIMIT
    end
 
    context "#touch_in" do
