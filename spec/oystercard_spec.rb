@@ -11,6 +11,10 @@ describe Oystercard do
     expect(subject.balance).to eq(0)
   end
 
+  it "checks that we have an empty list of journeys as default" do
+    expect(subject.journeys[0]).to be_nil
+  end
+
 
   it  { is_expected.to respond_to(:topup).with(1).argument }
 
