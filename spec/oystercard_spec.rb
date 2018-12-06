@@ -12,7 +12,7 @@ describe Oystercard do
   end
 
   it "checks that we have an empty list of journeys as default" do
-    expect(subject.journeys[0]).to be_nil
+    expect(subject.journeys).to be_empty
   end
 
 
