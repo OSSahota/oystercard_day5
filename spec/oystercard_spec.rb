@@ -51,10 +51,18 @@ describe Oystercard do
      end
    end
 
+
    it "should return true if we are in journey" do
      subject.topup(2)
      subject.touch_in(:entry_station)
      expect(subject.in_journey?).to eq true
+   end
+
+   it "should add a completed journey to the journey hash" do
+     subject.topup(2)
+     subject.touch_in(:entry_station)
+     subject.touch_out(:exit_station)
+     expect(subject.journeys).to include(start: :entry_station, end: :exit_station)
    end
 
 end
