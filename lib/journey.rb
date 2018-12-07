@@ -16,4 +16,8 @@ class Journey
     {start: :entry_station, end: :exit_station}
   end
 
+  def in_journey?
+    return true if @entry_station != nil
+  end
+
 end

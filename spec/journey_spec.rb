@@ -18,4 +18,9 @@ describe Journey do
     expect(subject.trip).to include(start: :entry_station, end: :exit_station)
   end
 
+  it "should return true if we are in journey" do
+    subject.start_journey(:entry_station)
+    expect(subject.in_journey?).to eq true
+  end
+
 end
