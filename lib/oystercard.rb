@@ -2,17 +2,15 @@ require_relative "./journey"
 
 class Oystercard
 
-  attr_reader :balance, :entry_station, :exit_station, :journeys, :journey
+  attr_reader :balance, :journeys, :journey, :history
   MIN_LIMIT = 1
   MAX_LIMIT = 90
 
   def initialize(journey = Journey.new)
     @balance = 0
     @status = false
-    @entry_station = nil
-    @exit_station = nil
-    @journeys = []
     @journey = journey
+    @history = []
   end
 
   def topup(money)
@@ -24,7 +22,6 @@ class Oystercard
     raise "YOU SHALL NOT PASSSSSSS" if @balance < MIN_LIMIT
 
     @status = true
-    # @exit_station = nil
 
     journey.start_journey(entry_station)
   end
@@ -32,8 +29,6 @@ class Oystercard
   def touch_out(exit_station)
     deduct
     @status = false
-    @journeys << {start: entry_station, end: exit_station}
-    # @entry_station = nil
     journey.end_journey(exit_station)
   end
 
@@ -48,6 +43,10 @@ class Oystercard
   private
       def deduct
         @balance -= MIN_LIMIT
+      end
+
+      def add_history
+        @history << journey.trip
       end
 
 end

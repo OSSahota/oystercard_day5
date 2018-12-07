@@ -2,7 +2,7 @@ require_relative "./oystercard"
 
 class Journey
 
-  attr_reader :entry_station, :exit_station
+  attr_reader :entry_station, :exit_station, :trip
 
   def start_journey(entry_station)
      @entry_station = entry_station
@@ -10,6 +10,10 @@ class Journey
 
   def end_journey(exit_station)
     @exit_station = exit_station
+  end
+
+  def trip
+    {start: :entry_station, end: :exit_station}
   end
 
 end

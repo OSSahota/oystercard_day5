@@ -25,7 +25,7 @@ describe Oystercard do
     end
 
     it "checks that we have an empty list of journeys as default" do
-      expect(subject.journeys).to be_empty
+      expect(subject.history).to be_empty
     end
 
     context "#touch_in" do
@@ -56,15 +56,5 @@ describe Oystercard do
       subject.touch_in(:entry_station)
       expect(subject.in_journey?).to eq true
     end
-
-    # it "should add a completed journey to the journey hash" do
-    #   subject.topup(2)
-    #   subject.touch_in(:entry_station)
-    #   subject.touch_out(:exit_station)
-    #   expect(subject.journeys).to include(start: :entry_station, end: :exit_station)
-    # end
-
-
-
 
 end
